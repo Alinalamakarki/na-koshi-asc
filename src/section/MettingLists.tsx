@@ -5,7 +5,7 @@ export async function getMettingLists() {
   try {
     const res = await fetch(
       'https://gist.githubusercontent.com/Alinalamakarki/5c4ce5ccc26c636cbda2e37a190962eb/raw/na-koshi-asc-metting-list.json',
-      { next: {revalidate: 2, tags: ['metting-lists'] } },
+      { next: { revalidate: 286400, tags: ['metting-lists'] } },
     );
     const data = await res.json();
     return data;

@@ -1,8 +1,7 @@
 'use client';
 import { Button } from '@nextui-org/react';
-import action from './action';
+import action, { getMettingLists } from './action';
 import { useCallback, useEffect, useState } from 'react';
-import { getMettingLists } from '@/section/MettingLists';
 
 export default function UiPage() {
   const [data, setData] = useState([]);

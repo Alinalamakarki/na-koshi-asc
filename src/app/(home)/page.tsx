@@ -1,6 +1,7 @@
 import MettingList from '@/section/MettingLists';
-export const dynamic = 'force-dynamic';
+import { headers } from 'next/headers';
 export default function Home() {
+  headers();
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-4">
       <MettingList />

@@ -6,15 +6,15 @@ import { getMettingLists } from '@/section/MettingLists';
 
 export default function UiPage() {
   const [data, setData] = useState([]);
-  const [currentData, setCurrentData] = useState([]);
+  // const [currentData, setCurrentData] = useState([]);
   const [changedData, setChangedData] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const revalidate = () => {
     action();
-    setIsLoading(true);
-    setTimeout(() => {
-      CurrentDataF();
-    }, 5000);
+    // setIsLoading(true);
+    // setTimeout(() => {
+    //   CurrentDataF();
+    // }, 5000);
   };
   const fetchData = useCallback(async () => {
     try {
@@ -28,22 +28,22 @@ export default function UiPage() {
     }
   }, []);
 
-  async function CurrentDataF() {
-    setIsLoading(true);
-    const cdata = await getMettingLists();
-    setCurrentData(cdata);
-    setIsLoading(false);
-  }
+  // async function CurrentDataF() {
+  //   setIsLoading(true);
+  //   const cdata = await getMettingLists();
+  //   setCurrentData(cdata);
+  //   setIsLoading(false);
+  // }
   useEffect(() => {
     fetchData();
-    CurrentDataF();
+    // CurrentDataF();
   }, [fetchData]);
 
-  useEffect(() => {
-    if (JSON.stringify(data) !== JSON.stringify(currentData)) {
-      setChangedData(true);
-    } else setChangedData(false);
-  }, [data, currentData]);
+  // useEffect(() => {
+  //   if (JSON.stringify(data) !== JSON.stringify(currentData)) {
+  //     setChangedData(true);
+  //   } else setChangedData(false);
+  // }, [data, currentData]);
   return (
     <div className="flex flex-col gap-4 p-4">
       <pre className="bg-content1 overflow-x-scroll">

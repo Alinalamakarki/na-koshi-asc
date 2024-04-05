@@ -1,37 +1,47 @@
 'use client';
 import { Button } from '@nextui-org/react';
 import action from './action';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { getMettingLists } from '@/section/MettingLists';
 
 export default function UiPage() {
   const [data, setData] = useState([]);
   const [currentData, setCurrentData] = useState([]);
   const [changedData, setChangedData] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const revalidate = () => {
     action();
+    setIsLoading(true);
+    setTimeout(() => {
+      CurrentDataF();
+    }, 5000);
   };
-  async function fetchData() {
-    const data = await fetch(
-      'https://gist.githubusercontent.com/Alinalamakarki/5c4ce5ccc26c636cbda2e37a190962eb/raw/na-koshi-asc-metting-list.json',
-      { cache: 'no-cache' },
-    );
-    setData(await data.json());
-  }
+  const fetchData = useCallback(async () => {
+    try {
+      const response = await fetch(
+        'https://gist.githubusercontent.com/Alinalamakarki/5c4ce5ccc26c636cbda2e37a190962eb/raw/na-koshi-asc-metting-list.json',
+        { cache: 'no-cache' },
+      );
+      setData(await response.json());
+    } catch (err) {
+      console.error(err);
+    }
+  }, []);
+
   async function CurrentDataF() {
-    const cdata = await fetch(
-      'https://gist.githubusercontent.com/Alinalamakarki/5c4ce5ccc26c636cbda2e37a190962eb/raw/na-koshi-asc-metting-list.json',
-    );
-    setCurrentData(await cdata.json());
+    setIsLoading(true);
+    const cdata = await getMettingLists();
+    setCurrentData(cdata);
+    setIsLoading(false);
   }
   useEffect(() => {
     fetchData();
     CurrentDataF();
-  }, []);
+  }, [fetchData]);
 
   useEffect(() => {
     if (JSON.stringify(data) !== JSON.stringify(currentData)) {
       setChangedData(true);
-      console.log('Data and currentData do not match');
     } else setChangedData(false);
   }, [data, currentData]);
   return (
@@ -51,6 +61,7 @@ export default function UiPage() {
       </Button>
       <p className="text-center">or</p>
       <Button
+        isLoading={isLoading}
         variant="flat"
         className={changedData ? 'bg-red-500' : ''}
         onClick={revalidate}

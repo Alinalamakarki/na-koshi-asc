@@ -1,15 +1,25 @@
 import MettingCard from '@/components/card/mettingCard';
 import { cn } from '@/lib/utils';
 
+export async function getMettingLists() {
+  try {
+    const res = await fetch(
+      'https://gist.githubusercontent.com/Alinalamakarki/5c4ce5ccc26c636cbda2e37a190962eb/raw/na-koshi-asc-metting-list.json',
+      { next: {revalidate: 2, tags: ['metting-lists'] } },
+    );
+    const data = await res.json();
+    return data;
+  } catch (err) {
+    console.error(err);
+    return [];
+  }
+}
 interface MettingListProps {
   className?: string;
 }
 export default async function MettingList({ className }: MettingListProps) {
-  const data = await fetch(
-    'https://gist.githubusercontent.com/Alinalamakarki/5c4ce5ccc26c636cbda2e37a190962eb/raw/na-koshi-asc-metting-list.json',
-    { cache: 'force-cache', next: { tags: ['metting-lists'] } },
-  );
-  const mettingListData: Array<MettingListType> = await data.json();
+  const mettingListData: Array<MettingListType> = await getMettingLists();
+
   return (
     <div
       className={cn(
@@ -18,7 +28,7 @@ export default async function MettingList({ className }: MettingListProps) {
       )}
     >
       {mettingListData.length ? (
-        mettingListData.map((item: MettingListType, idx) => (
+        mettingListData.map((item, idx) => (
           <MettingCard key={idx} item={item} />
         ))
       ) : (

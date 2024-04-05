@@ -17,12 +17,11 @@ function parseDateTime(date, time) {
   return parse(`${date} ${time}`, MEETING_TIME_FORMAT, new Date());
 }
 
-function formatDateTime(date, time) {
-  return format(date, MEETING_TIME_FORMAT) + ` ${time}`;
-}
-
 export function checkMeetingStatus(meeting) {
-  const today = new Date();
+  const now = new Date();
+const today = now.toLocaleString("en-US", { timeZone: "Asia/Kathmandu" });
+// console.log(today);
+
   const dayOfWeek = format(today, 'EEEE').toLowerCase();
 
   // Check if today is the day of the meeting

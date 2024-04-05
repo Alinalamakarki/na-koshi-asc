@@ -9,8 +9,8 @@ import {
 import { Button } from '@nextui-org/button';
 import { AppTheme } from '@/lib/utils';
 import MoniterIcon from './svg/icons/MoniterSvgIcon';
-import SunIcon from './svg/icons/SunSvgIcon';
-import MoonIcon from './svg/icons/MoonSvgIcon';
+import IconSun from './svg/icons/SunSvgIcon';
+import IconMoon from './svg/icons/MoonSvgIcon';
 import { type AppThemesType } from '@/types/theme.types';
 
 type onSelectChangeProps = any;
@@ -22,11 +22,11 @@ interface ThemeOptionProps {
 const themeOptions: ThemeOptionProps[] = [
   {
     value: AppTheme.LIGHT,
-    icon: <SunIcon className="group-hover:rotate-90" />,
+    icon: <IconSun className="group-hover:rotate-90" />,
   },
   {
     value: AppTheme.DARK,
-    icon: <MoonIcon className="group-hover:animate-swing" />,
+    icon: <IconMoon className="group-hover:animate-swing" />,
   },
   {
     value: AppTheme.SYSTEM,
@@ -45,8 +45,8 @@ export default function ThemeSwitcher() {
     <Dropdown>
       <DropdownTrigger>
         <Button isIconOnly variant="bordered" className="capitalize">
-          <SunIcon className="dark:hidden block" />{' '}
-          <MoonIcon className="hidden dark:block" />
+          <IconSun className="dark:hidden block" />{' '}
+          <IconMoon className="hidden dark:block" />
         </Button>
       </DropdownTrigger>
       <DropdownMenu

@@ -21,7 +21,6 @@ export default function MettingCard({
   isPressable = true,
 }: MettingCardProps) {
   const status = checkMeetingStatus(item);
-  console.log(item.name, status);
   return (
     <Card isPressable={isPressable} className="max-w-[400px]">
       <CardHeader className="flex gap-3 items-start">

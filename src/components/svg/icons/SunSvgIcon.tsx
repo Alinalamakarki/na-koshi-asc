@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils';
 import { forwardRef } from 'react';
 
-export const IconSun = forwardRef<SVGSVGElement, SVGProp>(
+ const IconSun = forwardRef<SVGSVGElement, SVGProp>(
   ({ className, ...props }, ref) => (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -26,3 +26,5 @@ export const IconSun = forwardRef<SVGSVGElement, SVGProp>(
   ),
 );
 IconSun.displayName = 'IconSun';
+
+export default IconSun;

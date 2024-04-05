@@ -20,9 +20,9 @@ export default function UiPage() {
     try {
       const response = await fetch(
         'https://gist.githubusercontent.com/Alinalamakarki/5c4ce5ccc26c636cbda2e37a190962eb/raw/na-koshi-asc-metting-list.json',
-        { cache: 'no-cache' },
       );
-      setData(await response.json());
+      const d = await response.json();
+      d && setData(d);
     } catch (err) {
       console.error(err);
     }

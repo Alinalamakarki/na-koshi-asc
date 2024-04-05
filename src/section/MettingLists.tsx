@@ -6,12 +6,17 @@ interface MettingListProps {
 }
 export default async function MettingList({ className }: MettingListProps) {
   const data = await fetch(
-    'https://gist.githubusercontent.com/Alinalamakarki/5c4ce5ccc26c636cbda2e37a190962eb/raw/8d2e2f7c88565948eba992f080e7fb41be695b52/na-koshi-asc-metting-list.json',
-    { next: { tags: ['metting-lists'] } },
+    'https://gist.githubusercontent.com/Alinalamakarki/5c4ce5ccc26c636cbda2e37a190962eb/raw/na-koshi-asc-metting-list.json',
+    { cache: 'force-cache', next: { tags: ['metting-lists'] } },
   );
   const mettingListData: Array<MettingListType> = await data.json();
   return (
-    <div className="gap-2 grid grid-cols-1 2xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2">
+    <div
+      className={cn(
+        'gap-2 grid grid-cols-1 2xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2',
+        className,
+      )}
+    >
       {mettingListData.length ? (
         mettingListData.map((item: MettingListType, idx) => (
           <MettingCard key={idx} item={item} />

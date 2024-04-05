@@ -13,6 +13,7 @@ export default function UiPage() {
   async function fetchData() {
     const data = await fetch(
       'https://gist.githubusercontent.com/Alinalamakarki/5c4ce5ccc26c636cbda2e37a190962eb/raw/na-koshi-asc-metting-list.json',
+      { cache: 'no-cache' },
     );
     setData(await data.json());
   }
